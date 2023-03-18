@@ -1,20 +1,19 @@
-const posts = [];
+const express = require('express');
 
-let nextPostId = 1;
+const app = express();
 
-class Post {
-  constructor(id, title, content) {
-    this.id = id;
-    this.title = title;
-    this.content = content;
-  }
-}
+const users = [
+  { id: 1, email: 'brofe93@gmail.com', password: 'pass123' },
+  { id: 2, email: 'someguy@gmail.com', password: 'pass123' },
+  { id: 3, email: 'anotheruser@gmail.com', password: 'pass123' }
+];
 
-const createPost = (title, content) => {
-  const post = new Post(nextPostId, title, content);
-  posts.push(post);
+const getUsers = (req, res) => {
+  res.json({ users: users });
 };
 
-createPost('First Post', 'This is my first post');
+app.get('/users', getUsers);
 
-console.log(posts);
+app.listen(3000, () => {
+  console.log('App listening on port 3000');
+});
