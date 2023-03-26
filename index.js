@@ -1,14 +1,27 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
+const MongoCLient = require('mongodb').MongoClient;
 
+const dbName = 'example-db';
+const client = new MongoCLient('mongodb+srv://Brendon:pass123@cluster0.ucjj1ea.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+
+const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let nextId = 1;
 let nextPostId = 1;
 
-const users = [];
+client.connect(err => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+  console.log('Connected to database');
+  const db = client.db(dbName);
+  const collection = db.collection('example-collection');
+
+  const users = [];
 
 class User {
 
@@ -57,14 +70,16 @@ const addPost = (req, res) => {
   res.json({ message: 'Post added' });
 }
 
-const getUsers = (req, res) => {
-  res.json({ users: users });
-};
+  const getUsers = (req, res) => {
+    res.json({ users: users });
+  };
 
-app.post('/users', addUser);
-app.get('/users', getUsers);
-app.post('/posts', addPost);
+  app.post('/users', addUser);
+  app.get('/users', getUsers);
+  app.post('/posts', addPost);
 
-app.listen(3000, () => {
-  console.log('App listening on port 3000');
+  app.listen(3000, () => {
+    console.log('App listening on port 3000');
+  });
+
 });
