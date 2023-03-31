@@ -14,6 +14,7 @@ const client = new MongoClient(
   { useNewUrlParser: true, useUnifiedTopology: true });
 const db = client.db('database');
 const usersCollection = db.collection('Users');
+const postsCollection = db.collection('posts');
 
 const connectToDataBase = async() => {
   try {
@@ -49,6 +50,12 @@ app.put('/users/:id', async (req, res) => {
   const username = req.body.username;
   await usersCollection.updateOne({ _id: new ObjectId(id) }, { $set: { username } });
   res.json({ msg: "User updated" });
+});
+
+app.post('/posts', async (req, res) => {
+  const newPost = req.body;
+  await postsCollection.insertOne(newPost);
+  res.json({msg: "New post created!"});
 });
 
 app.listen(PORT, () => {
