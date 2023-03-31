@@ -13,6 +13,7 @@ const client = new MongoClient(
   'mongodb+srv://Brendon:pass123@cluster0.ucjj1ea.mongodb.net/?retryWrites=true&w=majority', 
   { useNewUrlParser: true, useUnifiedTopology: true });
 const db = client.db('database');
+const usersCollection = db.collection('Users');
 
 const connectToDataBase = async() => {
   try {
@@ -27,26 +28,26 @@ connectToDataBase();
 
 app.post('/register', async (req, res) => {
   const newUser = req.body;
-  await db.collection('users').insertOne(newUser);
+  await usersCollection.insertOne(newUser);
   res.json({ msg: 'New user added' });
 });
 
 app.get('/users/:id', async (req, res) => {
   const id = req.params.id;
-  const user = await db.collection('users').findOne({ _id: new ObjectId(id) });
+  const user = await usersCollection.findOne({ _id: new ObjectId(id) });
   res.json(user);
 });
 
 app.get('/users', async (req, res) => {
   const username = req.body.username;
-  const user = await db.collection('users').findOne({ username });
+  const user = await usersCollection.findOne({ username });
   res.json(user);
 });
 
 app.put('/users/:id', async (req, res) => {
   const id = req.params.id
   const username = req.body.username;
-  await db.collection('users').updateOne({ _id: new ObjectId(id) }, { $set: { username } });
+  await usersCollection.updateOne({ _id: new ObjectId(id) }, { $set: { username } });
   res.json({ msg: "User updated" });
 });
 
