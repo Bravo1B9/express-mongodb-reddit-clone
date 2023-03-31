@@ -43,6 +43,13 @@ app.get('/users', async (req, res) => {
   res.json(user);
 });
 
+app.put('/users/:id', async (req, res) => {
+  const id = req.params.id
+  const username = req.body.username;
+  await db.collection('users').updateOne({ _id: new ObjectId(id) }, { $set: { username } });
+  res.json({ msg: "User updated" });
+});
+
 app.listen(PORT, () => {
   console.log('App listening on port 3000');
 });
