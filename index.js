@@ -9,7 +9,9 @@ const PORT = 3000
 
 app.use(express.json());
 
-const client = new MongoClient('mongodb+srv://Brendon:pass123@cluster0.ucjj1ea.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(
+  'mongodb+srv://Brendon:pass123@cluster0.ucjj1ea.mongodb.net/?retryWrites=true&w=majority', 
+  { useNewUrlParser: true, useUnifiedTopology: true });
 const db = client.db('database');
 
 const connectToDataBase = async() => {
