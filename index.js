@@ -58,10 +58,16 @@ app.post('/posts', async (req, res) => {
   res.json({msg: "New post created!"});
 });
 
-app.get('/posts', async (req, res) => {
+app.get('/posts/userId', async (req, res) => {
   const userId = req.query.userId;
-  const postsByUser = await postsCollection.find({ author: `${userId}` }).toArray();
-  res.json(postsByUser);
+  const postsByUserId = await postsCollection.find({ author: `${userId}` }).toArray();
+  res.json(postsByUserId);
+});
+
+app.get('/posts/username', async (req, res) => {
+  const username = req.body.username;
+  const postsByUsername = await postsCollection.find({ username: `${username}` }).toArray();
+  res.json(postsByUsername);
 });
 
 app.listen(PORT, () => {
