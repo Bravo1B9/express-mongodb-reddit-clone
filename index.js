@@ -1,5 +1,6 @@
 const express = require('express');
 const req = require('express/lib/request');
+const res = require('express/lib/response');
 const { MongoClient } = require('mongodb');
 const ObjectId = require('mongodb').ObjectId;
 
@@ -31,6 +32,12 @@ app.post('/register', async (req, res) => {
 app.get('/users/:id', async (req, res) => {
   const id = req.params.id;
   const user = await db.collection('users').findOne({ _id: new ObjectId(id) });
+  res.json(user);
+});
+
+app.get('/users', async (req, res) => {
+  const username = req.body.username;
+  const user = await db.collection('users').findOne({ username });
   res.json(user);
 });
 
