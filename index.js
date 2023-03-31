@@ -1,6 +1,7 @@
 const express = require('express');
 const req = require('express/lib/request');
 const { MongoClient } = require('mongodb');
+const ObjectId = require('mongodb').ObjectId;
 
 const app = express();
 const PORT = 3000
@@ -25,6 +26,12 @@ app.post('/register', async (req, res) => {
   const newUser = req.body;
   await db.collection('users').insertOne(newUser);
   res.json({ msg: 'New user added' });
+});
+
+app.get('/users/:id', async (req, res) => {
+  const id = req.params.id;
+  const user = await db.collection('users').findOne({ _id: new ObjectId(id) });
+  res.json(user);
 });
 
 app.listen(PORT, () => {
