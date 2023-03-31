@@ -13,7 +13,7 @@ const client = new MongoClient(
   'mongodb+srv://Brendon:pass123@cluster0.ucjj1ea.mongodb.net/?retryWrites=true&w=majority', 
   { useNewUrlParser: true, useUnifiedTopology: true });
 const db = client.db('database');
-const usersCollection = db.collection('Users');
+const usersCollection = db.collection('users');
 const postsCollection = db.collection('posts');
 
 const connectToDataBase = async() => {
@@ -56,6 +56,12 @@ app.post('/posts', async (req, res) => {
   const newPost = req.body;
   await postsCollection.insertOne(newPost);
   res.json({msg: "New post created!"});
+});
+
+app.get('/posts', async (req, res) => {
+  const userId = req.query.userId;
+  const postsByUser = await postsCollection.find({ author: `${userId}` }).toArray();
+  res.json(postsByUser);
 });
 
 app.listen(PORT, () => {
