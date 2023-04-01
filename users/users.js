@@ -19,10 +19,16 @@ const connectToDataBase = async() => {
 
 connectToDataBase();
 
+const registerUser = async (req, res) => {
+  const newUser = req.body;
+  await usersCollection.insertOne(newUser);
+  res.json({ msg: 'New user added' });
+};
+
 const getUserById = async (req, res) => {
   const id = req.params.id;
   const user = await usersCollection.findOne({ _id: new ObjectId(id) });
   res.json(user);
 };
 
-module.exports = { getUserById };
+module.exports = { registerUser, getUserById };

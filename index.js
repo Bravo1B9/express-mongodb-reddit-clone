@@ -9,24 +9,6 @@ const PORT = 3000
 app.use(express.json());
 app.use('/api', userRouter);
 
-// const client = new MongoClient(
-//   'mongodb+srv://Brendon:pass123@cluster0.ucjj1ea.mongodb.net/?retryWrites=true&w=majority', 
-//   { useNewUrlParser: true, useUnifiedTopology: true });
-// const db = client.db('database');
-// const usersCollection = db.collection('users');
-// const postsCollection = db.collection('posts');
-
-// const connectToDataBase = async() => {
-//   try {
-//     await client.connect();
-//     console.log('Connected to database');
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
-// connectToDataBase();
-
 // app.post('/register', async (req, res) => {
 //   const newUser = req.body;
 //   await usersCollection.insertOne(newUser);
