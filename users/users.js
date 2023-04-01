@@ -31,4 +31,10 @@ const getUserById = async (req, res) => {
   res.json(user);
 };
 
-module.exports = { registerUser, getUserById };
+const getUserByUsername = async (req, res) => {
+  const username = req.body.username;
+  const user = await usersCollection.findOne({ username });  
+  res.json(user);
+}
+
+module.exports = { registerUser, getUserById, getUserByUsername };
