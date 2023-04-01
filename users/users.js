@@ -6,7 +6,6 @@ const client = new MongoClient(
   { useNewUrlParser: true, useUnifiedTopology: true });
 const db = client.db('database');
 const usersCollection = db.collection('users');
-const postsCollection = db.collection('posts');
 
 const connectToDataBase = async() => {
   try {

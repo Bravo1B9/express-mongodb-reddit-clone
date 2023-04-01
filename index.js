@@ -2,12 +2,13 @@ const express = require('express');
 const { MongoClient } = require('mongodb');
 const ObjectId = require('mongodb').ObjectId;
 const userRouter = require('./users/userRouter');
+const postRouter = require('./posts/postsRouter');
 
 const app = express();
 const PORT = 3000
 
 app.use(express.json());
-app.use('/api', userRouter);
+app.use('/api', userRouter, postRouter);
 
 // app.post('/register', async (req, res) => {
 //   const newUser = req.body;
