@@ -13,4 +13,10 @@ const addPost = async (req, res) => {
   res.json({msg: "New post created!"});
 };
 
-module.exports = { addPost };
+const getPostsByUserId = async (req, res) => {
+  const userId = req.query.userId;
+  const postsByUserId = await postsCollection.find({ author: `${userId}` }).toArray();
+  res.json(postsByUserId);
+};
+
+module.exports = { addPost, getPostsByUserId };
