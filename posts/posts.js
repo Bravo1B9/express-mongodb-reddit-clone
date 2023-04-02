@@ -1,3 +1,4 @@
+const req = require('express/lib/request');
 const { MongoClient } = require('mongodb');
 const ObjectId = require('mongodb').ObjectId;
 
@@ -19,4 +20,10 @@ const getPostsByUserId = async (req, res) => {
   res.json(postsByUserId);
 };
 
-module.exports = { addPost, getPostsByUserId };
+const getPostsByUsername = async (req, res) => {
+  const username = req.body.username;
+  const postsByUsername = await postsCollection.find({ username: `${username}` }).toArray();
+  res.json(postsByUsername);
+};
+
+module.exports = { addPost, getPostsByUserId, getPostsByUsername };
