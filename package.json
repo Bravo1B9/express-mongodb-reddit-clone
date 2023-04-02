@@ -19,9 +19,14 @@
   },
   "homepage": "https://github.com/Bravo1B9/express-mongodb-reddit-clone#readme",
   "dependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.15.11",
     "body-parser": "^1.20.2",
     "express": "^4.18.2",
     "mongodb": "^5.1.0",
     "nodemon": "^2.0.21"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
   }
 }
