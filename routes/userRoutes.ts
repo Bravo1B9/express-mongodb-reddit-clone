@@ -1,9 +1,7 @@
-import { Request, Response } from'express';
 const express = require('express');
 const router = express.Router();
+const addUser = require('../controllers/userController');
 
-router.post('/users', (req: Request, res: Response) => {
-  res.json({ msg: 'Add new user' });
-});
+router.post('/users', addUser);
 
 module.exports = router;

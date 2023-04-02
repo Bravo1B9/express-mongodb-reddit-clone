@@ -1,7 +1,7 @@
+const userRouter = require('./routes/userRoutes');
 import { Request, Response } from "express";
 const connectToDatabase = require('./db');
 const express = require('express');
-const userRouter = require('./routes/userRoutes');
 
 
 connectToDatabase();
