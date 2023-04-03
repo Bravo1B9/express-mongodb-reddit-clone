@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { db } from "../db";
 
 const userCollection = db.collection('users');
+const postCollection = db.collection('posts');
 
 const addUser = async (req: Request, res: Response) => {
   const newUser = req.body;
@@ -19,6 +20,7 @@ const updateUsername = async (req: Request, res: Response) => {
   const currentUsername = req.body.currentUsername
   const username = req.body.username;
   await userCollection.updateOne({ username: currentUsername }, { $set: { username } });
+  await postCollection.updateMany({ author: `${currentUsername}` }, { $set: { author: username } });
   res.json({ msg: 'Username updated' });
 };
 
