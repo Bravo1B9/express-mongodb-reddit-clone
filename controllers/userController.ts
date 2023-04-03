@@ -9,4 +9,10 @@ const addUser = async (req: Request, res: Response) => {
   res.json({ userAdded: newUser });
 };
 
-module.exports = addUser;
+const getUserByUsername = async (req: Request, res: Response) => {
+  const username = req.body.username;
+  const user = await userCollection.findOne({ username: username });
+  res.json({ user });
+};  
+
+module.exports = { addUser, getUserByUsername };
