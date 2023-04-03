@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-const database = require('../db');
+import { db } from "../db";
 
-const postCollection = database.db.collection('posts');
+const postCollection = db.collection('posts');
 
 const addPost = async ( req: Request, res: Response) => {
   const newPost = req.body;

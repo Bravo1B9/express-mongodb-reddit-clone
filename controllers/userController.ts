@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-const database = require('../db');
+import { db } from "../db";
 
-const userCollection = database.db.collection('users');
+const userCollection = db.collection('users');
 
 const addUser = async (req: Request, res: Response) => {
   const newUser = req.body;
