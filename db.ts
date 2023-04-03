@@ -3,6 +3,7 @@ const { MongoClient } = require('mongodb');
 const uri = 'mongodb+srv://Brendon:pass123@cluster0.ucjj1ea.mongodb.net/?retryWrites=true&w=majority';
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const db = client.db('database');
 
 async function connectToDatabase() {
   try {
@@ -13,4 +14,4 @@ async function connectToDatabase() {
   }
 }
 
-module.exports = connectToDatabase;
+module.exports = { connectToDatabase, db };
