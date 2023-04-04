@@ -10,13 +10,11 @@ const PORT = 3000;
 
 connectToDatabase();
 
-const sayHello = (req: Request, res: Response) => {
-  res.json({ msg: 'Hello world' });
-};
-
 app.use(express.json());
 
-app.get('/', sayHello);
+app.get('/', (req: Request, res: Response) => {
+  res.json({ msg: 'Home Page' });
+});
 app.use('/api', userRouter, postRouter);
 
 app.listen(PORT, () => {

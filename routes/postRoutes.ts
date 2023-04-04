@@ -1,10 +1,10 @@
 import { Router } from "express";
-const posts = require('../controllers/postController');
+import { addPost, getPostsByUsername, updatePostBody } from "../controllers/postController";
 
 export const router = Router();
 
-router.post('/posts', posts.addPost);
-router.get('/posts', posts.getPostsByUsername);
-router.put('/posts', posts.updatePostBody);
+router.post('/posts', addPost);
+router.get('/posts', getPostsByUsername);
+router.put('/posts', updatePostBody);
 
 module.exports = router;
