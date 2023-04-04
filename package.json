@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
     "serve": "nodemon index.ts",
-    "start": "ts-node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/Bravo1B9/express-mongodb-reddit-clone#readme",
   "dependencies": {
     "body-parser": "^1.20.2",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongodb": "^5.1.0"
   },
