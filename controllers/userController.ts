@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import { db } from "../db";
+import { UserModal } from "../models/userModel";
 
 const userCollection = db.collection('users');
 const postCollection = db.collection('posts');
 
 const addUser = async (req: Request, res: Response) => {
-  const newUser = req.body;
+  const newUser: UserModal = req.body;
   await userCollection.insertOne(newUser);
   res.json({ msg: 'New user added' });
 };
