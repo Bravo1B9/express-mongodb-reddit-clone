@@ -1,20 +1,26 @@
-const { MongoClient } = require('mongodb');
+import { MongoClient, Db } from "mongodb";
+import dotenv from "dotenv";
 
-const uri = 'mongodb+srv://Brendon:pass123@cluster0.ucjj1ea.mongodb.net/?retryWrites=true&w=majority';
+dotenv.config();
 
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const mongodbUri = process.env.MONGODB_URI || '';
 
-export const db = client.db('database');
+let cachedDb: Db;
 
-export const userCollection = db.collection('users');
-export const profileCollection = db.collection('profiles');
+export const connectToDatabase = async (): Promise<Db> => {
+  if (cachedDb) {
+    return cachedDb;
+  }
 
-export const connectToDatabase = async () => {
   try {
-    await client.connect();
+    const client = await MongoClient.connect(mongodbUri);
+    const db = client.db();
+    cachedDb = db;
     console.log('Connected to database');
   } catch (err) {
-    console.log(err);
-  }
-}
+    console.error('Failed to connect to the database', err);
+    throw err;
+  }   
 
+  return cachedDb;
+};
