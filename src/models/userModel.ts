@@ -1,4 +1,5 @@
 import { userCollection } from "../utils/db";
+import { ObjectId } from "mongodb";
 
 export interface User {
   _id: string;
@@ -21,3 +22,8 @@ export const getUserByEmail = async (email: string) => {
   const user = await userCollection.findOne({ email });
   return user;
 };
+
+export const upateUsernameById = async (objectId: string, newUsername: string) => {
+  const username = newUsername
+  await userCollection.updateOne({ _id: new ObjectId(`${objectId}`) }, { $set: { username } });
+}

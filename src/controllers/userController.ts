@@ -19,3 +19,9 @@ export const getUserByEmail = async (req: Request, res: Response) => {
   const user = await UserModel.getUserByEmail(email);
   res.status(200).json({ user: user });
 };
+
+export const updateUsernameById = async (req: Request, res: Response) => {
+  const { userId, newUsername } = req.body;
+  await UserModel.upateUsernameById(userId, newUsername);
+  res.status(200).json({ msg: `User ${userId} updated with new username ${newUsername}` });
+};
