@@ -11,6 +11,9 @@ export const registerUser = async (req: Request, res: Response) => {
 export const getUserByUsername = async (req: Request, res: Response) => {
   const username = req.body.username;
   const user = await UserModel.getUserByUsername(username);
+  if(!user) {
+    res.status(404).json({ msg: 'User with that username not found' });
+  }
   res.status(200).json({ user: user });
 };
 
