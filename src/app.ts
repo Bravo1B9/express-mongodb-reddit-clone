@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import userRoutes from "./routes/userRoutes";
+import profileRoutes from "./routes/profileRoutes";
 
 const createApp = (): Express => {
   const app = express();
@@ -11,6 +12,7 @@ const createApp = (): Express => {
   });
 
   app.use('/api/users', userRoutes);
+  app.use('/api/profiles', profileRoutes);
 
   return app;
 }
