@@ -2,7 +2,7 @@ import { userCollection } from "../utils/db";
 import { ObjectId } from "mongodb";
 
 export interface User {
-  _id: string;
+  _id: ObjectId;
   username: string;
   email: string;
   password: string;
