@@ -26,4 +26,9 @@ export const getUserByEmail = async (email: string) => {
 export const upateUsernameById = async (objectId: string, newUsername: string) => {
   const username = newUsername
   await userCollection.updateOne({ _id: new ObjectId(`${objectId}`) }, { $set: { username } });
-}
+};
+
+export const updateUserEmailById = async (objectId: string, newEmail: string) => {
+  const email = newEmail;
+  await userCollection.updateOne({ _id: new ObjectId(`${objectId}`) }, { $set: { email } });
+};
