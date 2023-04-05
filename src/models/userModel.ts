@@ -13,8 +13,8 @@ export const registerUser = async (user: Omit<User, "_id">) => {
   await userCollection.insertOne(user);
 };
 
-export const getUserById = async (objectId: ObjectId) => {
-  const user = await userCollection.findOne({ _id: new ObjectId(`${objectId}`) });
+export const getUserById = async (userId: string) => {
+  const user = await userCollection.findOne({ _id: new ObjectId(`${userId}`) });
   return user;
 };
 

@@ -4,6 +4,7 @@ import * as UserController from "../controllers/userController";
 const router: Router = express.Router();
 
 router.post('/register', UserController.registerUser);
+router.get('/user/:id', UserController.getUserById);
 router.get('/username', UserController.getUserByUsername);
 router.get('/email', UserController.getUserByEmail);
 router.put('/update-username', UserController.updateUsernameById);

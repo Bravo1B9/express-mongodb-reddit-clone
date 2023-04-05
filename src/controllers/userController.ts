@@ -28,6 +28,12 @@ export const registerUser = async (req: Request, res: Response) => {
   };
 };
 
+export const getUserById = async (req: Request, res: Response) => {
+  const userId = req.params.id;
+  const user = await UserModel.getUserById(userId);
+  res.status(200).json({ user: user });
+};
+
 export const getUserByUsername = async (req: Request, res: Response) => {
   const username = req.body.username;
   const user = await UserModel.getUserByUsername(username);
