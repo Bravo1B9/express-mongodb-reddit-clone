@@ -7,6 +7,7 @@ const mongodbUri = process.env.MONGODB_URI || '';
 
 let cachedDb: Db;
 export let userCollection: Collection;
+export let profileCollection: Collection;
 
 export const connectToDatabase = async (): Promise<Db> => {
   if (cachedDb) {
@@ -18,6 +19,7 @@ export const connectToDatabase = async (): Promise<Db> => {
     const db = client.db();
     cachedDb = db;
     userCollection = db.collection('users');
+    profileCollection = db.collection('profiles');
     console.log('Connected to database');
   } catch (err) {
     console.error('Failed to connect to the database', err);
