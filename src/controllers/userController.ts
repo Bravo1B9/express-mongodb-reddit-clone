@@ -17,6 +17,9 @@ export const getUserByUsername = async (req: Request, res: Response) => {
 export const getUserByEmail = async (req: Request, res: Response) => {
   const email = req.body.email;
   const user = await UserModel.getUserByEmail(email);
+  if(!user) {
+    res.status(404).json({ msg: 'User with that email not found' });
+  }
   res.status(200).json({ user: user });
 };
 
