@@ -7,3 +7,9 @@ export const registerUser = async (req: Request, res: Response) => {
   await UserModel.registerUser(newUser);
   res.status(201).json({ msg: 'User successfully registerd' });
 };
+
+export const getUserByUsername = async (req: Request, res: Response) => {
+  const username = req.body.username;
+  const user = await UserModel.getUserByUsername(username);
+  res.json({ user: user });
+};

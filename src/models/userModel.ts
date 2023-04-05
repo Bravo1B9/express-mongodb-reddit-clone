@@ -11,3 +11,8 @@ export interface User {
 export const registerUser = async (user: Omit<User, "_id">) => {
   await userCollection.insertOne(user);
 };
+
+export const getUserByUsername = async (username: string) => {
+  const user = await userCollection.findOne({ username });
+  return user;
+};
