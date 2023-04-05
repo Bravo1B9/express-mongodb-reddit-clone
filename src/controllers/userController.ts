@@ -33,8 +33,9 @@ export const getUserByUsername = async (req: Request, res: Response) => {
   const user = await UserModel.getUserByUsername(username);
   if (!user) {
     res.status(404).json({ msg: "User with that username not found" });
+  } else {
+    res.status(200).json({ user: user });
   }
-  res.status(200).json({ user: user });
 };
 
 export const getUserByEmail = async (req: Request, res: Response) => {
@@ -42,8 +43,9 @@ export const getUserByEmail = async (req: Request, res: Response) => {
   const user = await UserModel.getUserByEmail(email);
   if (!user) {
     res.status(404).json({ msg: "User with that email not found" });
+  } else {
+    res.status(200).json({ user: user });
   };
-  res.status(200).json({ user: user });
 };
 
 export const updateUsernameById = async (req: Request, res: Response) => {
