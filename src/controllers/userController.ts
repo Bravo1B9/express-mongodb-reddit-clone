@@ -7,9 +7,13 @@ import { ObjectId } from "mongodb";
 
 export const registerUser = async (req: Request, res: Response) => {
   const username = req.body.username;
-  const foundUser = await UserModel.getUserByUsername(username);
-  if (username === foundUser?.username) {
+  const email = req.body.email;
+  const foundUserByUsername = await UserModel.getUserByUsername(username);
+  const foundUserByEmail = await UserModel.getUserByEmail(email);
+  if (foundUserByUsername) {
     res.status(409).json({ msg: "User with that username already exists" });
+  } else if(foundUserByEmail) {
+    res.status(409).json({ msg: "User with that email already exists" });
   } else {
     const newUser: User = req.body;
     const newProfile: Omit<Profile, "_id"> = {
