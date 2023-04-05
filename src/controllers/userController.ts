@@ -1,10 +1,20 @@
 import { Request, Response } from "express";
 import * as UserModel from "../models/userModel";
+import * as ProfileModel from "../models/profileModel";
 import { User } from "../models/userModel";
+import { Profile } from "../models/profileModel";
+import { ObjectId } from "mongodb";
 
 export const registerUser = async (req: Request, res: Response) => {
-  const newUser: Omit<User, "_id"> = req.body;
+  const newUser: User = req.body;
+  const newProfile: Omit<Profile, "_id"> = {
+    _userId: new ObjectId(newUser._id),
+    username: newUser.username,
+    joinedCommunities: [],
+    posts: []
+  };
   await UserModel.registerUser(newUser);
+  await ProfileModel.createProfile(newProfile);
   res.status(201).json({ msg: 'User successfully registerd' });
 };
 
