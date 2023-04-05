@@ -19,6 +19,7 @@ export const connectToDatabase = async (): Promise<Db> => {
     const db = client.db();
     cachedDb = db;
     userCollection = db.collection('users');
+    await userCollection.createIndex({ 'username': 1 }, { unique: true });
     profileCollection = db.collection('profiles');
     console.log('Connected to database');
   } catch (err) {

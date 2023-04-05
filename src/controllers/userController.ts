@@ -48,7 +48,10 @@ export const getUserByEmail = async (req: Request, res: Response) => {
 
 export const updateUsernameById = async (req: Request, res: Response) => {
   const { userId, newUsername } = req.body;
+  const foundUser = await UserModel.getUserById(userId);
+  const username = foundUser?.username;
   await UserModel.upateUsernameById(userId, newUsername);
+  await ProfileModel.updateProfileUsername(username, newUsername);
   res
     .status(200)
     .json({ msg: `User ${userId} updated with new username ${newUsername}` });
