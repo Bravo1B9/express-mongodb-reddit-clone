@@ -16,3 +16,8 @@ export const getUserByUsername = async (username: string) => {
   const user = await userCollection.findOne({ username });
   return user;
 };
+
+export const getUserByEmail = async (email: string) => {
+  const user = await userCollection.findOne({ email });
+  return user;
+};

@@ -4,6 +4,7 @@ import * as UserController from "../controllers/userController";
 const router: Router = express.Router();
 
 router.post('/register', UserController.registerUser);
-router.get('/', UserController.getUserByUsername);
+router.get('/username', UserController.getUserByUsername);
+router.get('/email', UserController.getUserByEmail);
 
 export default router;

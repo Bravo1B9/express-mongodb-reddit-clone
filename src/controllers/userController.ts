@@ -11,5 +11,11 @@ export const registerUser = async (req: Request, res: Response) => {
 export const getUserByUsername = async (req: Request, res: Response) => {
   const username = req.body.username;
   const user = await UserModel.getUserByUsername(username);
-  res.json({ user: user });
+  res.status(200).json({ user: user });
+};
+
+export const getUserByEmail = async (req: Request, res: Response) => {
+  const email = req.body.email;
+  const user = await UserModel.getUserByEmail(email);
+  res.status(200).json({ user: user });
 };
