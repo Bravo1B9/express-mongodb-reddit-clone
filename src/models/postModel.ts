@@ -20,3 +20,8 @@ export const getPostsByCommunity = async (community: string) => {
   const posts = await postCollection.find({ community }).toArray();
   return posts;
 };
+
+export const getPostById = async (postId: string) => {
+  const post = await postCollection.findOne({ _id: new ObjectId(postId) });
+  return post;
+};
