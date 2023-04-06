@@ -6,5 +6,6 @@ const router: Router = express.Router();
 router.post('/community/:community', PostController.addPost);
 router.get('/community/:community', PostController.getPostsByCommunity);
 router.get('/post/:postId', PostController.getPostById);
+router.post('/post/:postId', PostController.addComment);
 
 export default router;

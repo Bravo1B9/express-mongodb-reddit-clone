@@ -6,11 +6,11 @@ export interface Post {
   title: string;
   content: string;
   upvotes: number;
-  downvotes:  number;
+  downvotes: number;
   community: string;
   comments: Comment[];
   author: string;
-};
+}
 
 export const addPost = async (post: Post) => {
   await postCollection.insertOne(post);
@@ -24,4 +24,11 @@ export const getPostsByCommunity = async (community: string) => {
 export const getPostById = async (postId: string) => {
   const post = await postCollection.findOne({ _id: new ObjectId(postId) });
   return post;
+};
+
+export const addComment = async (postId: string, comment: Comment) => {
+  await postCollection.updateOne(
+    { _id: new ObjectId(postId) },
+    { $push: { comments: comment } }
+  );
 };
