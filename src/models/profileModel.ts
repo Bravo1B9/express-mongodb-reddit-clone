@@ -13,6 +13,11 @@ export const createProfile = async (profile: Omit<Profile, "_id">) => {
   await profileCollection.insertOne(profile);
 };
 
+export const getProfileById = async (profileId: string) => {
+  const profile = await profileCollection.findOne({ _id: new ObjectId(profileId) });
+  return profile;
+};
+
 export const getProfileByUsername = async (username: string) => {
   const profile = await profileCollection.findOne({ username: username });
   return profile;
