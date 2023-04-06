@@ -1,5 +1,6 @@
 import { postCollection } from "../utils/db";
 import { ObjectId } from "mongodb";
+import { Comment } from "./commentModel";
 
 export interface Post {
   title: string;
@@ -7,4 +8,6 @@ export interface Post {
   upvotes: number;
   downvotes:  number;
   community: ObjectId;
+  comments: Comment[];
+  author: string;
 };
