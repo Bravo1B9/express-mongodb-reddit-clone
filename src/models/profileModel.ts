@@ -14,7 +14,9 @@ export const createProfile = async (profile: Omit<Profile, "_id">) => {
 };
 
 export const getProfileById = async (profileId: string) => {
-  const profile = await profileCollection.findOne({ _id: new ObjectId(profileId) });
+  const profile = await profileCollection.findOne({
+    _id: new ObjectId(profileId),
+  });
   return profile;
 };
 
@@ -30,5 +32,12 @@ export const updateProfileUsername = async (
   await profileCollection.updateOne(
     { username: `${currentUsername}` },
     { $set: { username: newUsername } }
+  );
+};
+
+export const addCommunity = async (profileId: string, communityId: ObjectId) => {
+  await profileCollection.updateOne(
+    { _id: new ObjectId(profileId) },
+    { $push: { joinedCommunities: communityId } }
   );
 };

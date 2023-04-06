@@ -6,14 +6,15 @@ import { ObjectId } from "mongodb";
 
 export const createCommunity = async (req: Request, res: Response) => {
   const profile = await ProfileModel.getProfileById(req.params.profileId);
-  console.log(profile);
+  const profileId = req.params.profileId;
   const foundingMember = new ObjectId(req.body.foundingMember);
-  const newCommunity: Omit<Community, "_id"> = {
+  const community: Omit<Community, "_id"> = {
     name: req.body.name,
     description: req.body.description,
     members: [foundingMember],
     posts: []
   };
-  await CommunityModel.createCommunity(newCommunity);
+  const newCommunity = await CommunityModel.createCommunity(community);
+  await ProfileModel.addCommunity(profileId, newCommunity.insertedId);
   res.status(201).json({ msg: `Community ${req.body.name} successfully created` });
 };

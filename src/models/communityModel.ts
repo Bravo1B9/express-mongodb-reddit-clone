@@ -10,5 +10,6 @@ export interface Community {
 }
 
 export const createCommunity = async (community: Omit<Community, "_id">) => {
-  await communityCollection.insertOne(community);
+  const newCommunity = await communityCollection.insertOne(community);
+  return newCommunity;
 };
