@@ -5,7 +5,6 @@ import { Community } from "../models/communityModel";
 import { ObjectId } from "mongodb";
 
 export const createCommunity = async (req: Request, res: Response) => {
-  const profile = await ProfileModel.getProfileById(req.params.profileId);
   const profileId = req.params.profileId;
   const foundingMember = new ObjectId(req.body.foundingMember);
   const community: Omit<Community, "_id"> = {
