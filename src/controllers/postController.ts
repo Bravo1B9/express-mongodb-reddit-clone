@@ -15,3 +15,9 @@ export const addPost = async (req: Request, res: Response) => {
   await PostModel.addPost(post);
   res.status(201).json({ msg: 'Post added successfully' });
 };
+
+export const getPostsByCommunity = async (req: Request, res: Response) => {
+  const community = req.params.community;
+  const posts = await PostModel.getPostsByCommunity(community);
+  res.status(200).json({ posts: posts });
+};

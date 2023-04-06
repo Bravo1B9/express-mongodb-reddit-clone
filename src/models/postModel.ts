@@ -15,3 +15,8 @@ export interface Post {
 export const addPost = async (post: Post) => {
   await postCollection.insertOne(post);
 };
+
+export const getPostsByCommunity = async (community: string) => {
+  const posts = await postCollection.find({ community }).toArray();
+  return posts;
+};
