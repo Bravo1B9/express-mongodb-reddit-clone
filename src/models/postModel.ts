@@ -7,7 +7,11 @@ export interface Post {
   content: string;
   upvotes: number;
   downvotes:  number;
-  community: ObjectId;
+  community: string;
   comments: Comment[];
   author: string;
+};
+
+export const addPost = async (post: Post) => {
+  await postCollection.insertOne(post);
 };
