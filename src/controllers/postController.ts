@@ -40,3 +40,9 @@ export const addComment = async (req: Request, res: Response) => {
   await PostModel.addComment(postId, comment);
   res.status(200).json({ msg: `New comment for post ${postId} added` });
 };
+
+export const upvotePost = async (req: Request, res: Response) => {
+  const postId = req.params.postId;
+  await PostModel.upvotePost(postId);
+  res.status(200).json({ msg: `Post ${postId} upvoted` });
+};

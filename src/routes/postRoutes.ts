@@ -7,5 +7,6 @@ router.post('/community/:community', PostController.addPost);
 router.get('/community/:community', PostController.getPostsByCommunity);
 router.get('/post/:postId', PostController.getPostById);
 router.post('/post/:postId', PostController.addComment);
+router.put('/post/upvote/:postId', PostController.upvotePost);
 
 export default router;

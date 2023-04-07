@@ -32,3 +32,14 @@ export const addComment = async (postId: string, comment: Comment) => {
     { $push: { comments: comment } }
   );
 };
+
+export const upvotePost = async (postId: string) => {
+  const post = await postCollection.findOne({ _id: new ObjectId(postId) });
+  const numUpvotes = post?.upvotes;
+  const newUpvotesVal = numUpvotes + 1;
+  await postCollection.updateOne(
+    { _id: new ObjectId(postId) },
+    { $set: { upvotes: newUpvotesVal } }
+  );
+};
+
