@@ -36,10 +36,12 @@ export const addComment = async (postId: string, comment: Comment) => {
 export const upvotePost = async (postId: string) => {
   const post = await postCollection.findOne({ _id: new ObjectId(postId) });
   const numUpvotes = post?.upvotes;
+  const numDownvotes = post?.downvotes;
   const newUpvotesVal = numUpvotes + 1;
+  const newDownvotesVal = numDownvotes - 1;
   await postCollection.updateOne(
     { _id: new ObjectId(postId) },
-    { $set: { upvotes: newUpvotesVal } }
+    { $set: { upvotes: newUpvotesVal, downvotes: newDownvotesVal } }
   );
 };
 
