@@ -48,9 +48,11 @@ export const upvotePost = async (postId: string) => {
 export const downvotePost = async (postId: string) => {
   const post = await postCollection.findOne({ _id: new ObjectId(postId) });
   const numDownvotes = post?.downvotes;
+  const numUpvotes = post?.upvotes;
   const newDownvotesVal = numDownvotes + 1;
+  const newUpvotesVal = numUpvotes - 1;
   await postCollection.updateOne(
     { _id: new ObjectId(postId) },
-    { $set: { downvotes: newDownvotesVal } }
+    { $set: { downvotes: newDownvotesVal, upvotes: newUpvotesVal } }
   );
 };
