@@ -43,3 +43,12 @@ export const upvotePost = async (postId: string) => {
   );
 };
 
+export const downvotePost = async (postId: string) => {
+  const post = await postCollection.findOne({ _id: new ObjectId(postId) });
+  const numDownvotes = post?.downvotes;
+  const newDownvotesVal = numDownvotes + 1;
+  await postCollection.updateOne(
+    { _id: new ObjectId(postId) },
+    { $set: { downvotes: newDownvotesVal } }
+  );
+};
