@@ -23,6 +23,12 @@ export const getPostsByCommunity = async (req: Request, res: Response) => {
   res.status(200).json({ posts: posts });
 };
 
+export const getPostsByUpvotes = async (req: Request, res: Response) => {
+  const community = req.params.community;
+  const posts = await PostModel.getPostsByUpvotes(community);
+  res.status(200).json({ posts: posts });
+};
+
 export const getPostById = async (req: Request, res: Response) => {
   const postId = req.params.postId;
   const post = await PostModel.getPostById(postId);

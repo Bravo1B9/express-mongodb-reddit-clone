@@ -21,6 +21,14 @@ export const getPostsByCommunity = async (community: string) => {
   return posts;
 };
 
+export const getPostsByUpvotes = async (community: string) => {
+  const posts = await postCollection
+    .find({ community })
+    .sort({ upvotes: -1 })
+    .toArray();
+  return posts;
+};
+
 export const getPostById = async (postId: string) => {
   const post = await postCollection.findOne({ _id: new ObjectId(postId) });
   return post;

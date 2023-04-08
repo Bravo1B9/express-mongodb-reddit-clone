@@ -9,5 +9,6 @@ router.get('/post/:postId', PostController.getPostById);
 router.post('/post/:postId', PostController.addComment);
 router.put('/post/upvote/:postId', PostController.upvotePost);
 router.put('/post/downvote/:postId', PostController.downvotePost);
+router.get('/posts/:community', PostController.getPostsByUpvotes);
 
 export default router;
