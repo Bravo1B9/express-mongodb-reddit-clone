@@ -46,7 +46,12 @@ export const upvotePost = async (postId: string) => {
   const numUpvotes = post?.upvotes;
   const numDownvotes = post?.downvotes;
   const newUpvotesVal = numUpvotes + 1;
-  const newDownvotesVal = numDownvotes - 1;
+  let newDownvotesVal;
+  if(numDownvotes === 0) {
+    newDownvotesVal = numDownvotes;
+  } else {
+    newDownvotesVal = numDownvotes - 1;
+  }
   await postCollection.updateOne(
     { _id: new ObjectId(postId) },
     { $set: { upvotes: newUpvotesVal, downvotes: newDownvotesVal } }
@@ -58,7 +63,12 @@ export const downvotePost = async (postId: string) => {
   const numDownvotes = post?.downvotes;
   const numUpvotes = post?.upvotes;
   const newDownvotesVal = numDownvotes + 1;
-  const newUpvotesVal = numUpvotes - 1;
+  let newUpvotesVal;
+  if(numUpvotes === 0) {
+    newUpvotesVal = numUpvotes;
+  } else {
+    newUpvotesVal = numUpvotes - 1
+  }
   await postCollection.updateOne(
     { _id: new ObjectId(postId) },
     { $set: { downvotes: newDownvotesVal, upvotes: newUpvotesVal } }
